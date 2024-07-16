@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -332,6 +332,22 @@
 		CEF0B63628234B4800F425CB /* termcolors.c in Sources */ = {isa = PBXBuildFile; fileRef = CEF0B61428234B4800F425CB /* termcolors.c */; };
 		CEF0B63728234B4800F425CB /* termcolors.c in Sources */ = {isa = PBXBuildFile; fileRef = CEF0B61428234B4800F425CB /* termcolors.c */; };
 		CEF0B63828234B4800F425CB /* termcolors.c in Sources */ = {isa = PBXBuildFile; fileRef = CEF0B61428234B4800F425CB /* termcolors.c */; };
+		D13316362C467A230050C5C4 /* oplist.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316352C467A230050C5C4 /* oplist.c */; };
+		D13316372C467A230050C5C4 /* oplist.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316352C467A230050C5C4 /* oplist.c */; };
+		D13316382C467A230050C5C4 /* oplist.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316352C467A230050C5C4 /* oplist.c */; };
+		D13316392C467A230050C5C4 /* oplist.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316352C467A230050C5C4 /* oplist.c */; };
+		D133163B2C467A4F0050C5C4 /* out-default.c in Sources */ = {isa = PBXBuildFile; fileRef = D133163A2C467A4F0050C5C4 /* out-default.c */; };
+		D133163C2C467A4F0050C5C4 /* out-default.c in Sources */ = {isa = PBXBuildFile; fileRef = D133163A2C467A4F0050C5C4 /* out-default.c */; };
+		D133163D2C467A4F0050C5C4 /* out-default.c in Sources */ = {isa = PBXBuildFile; fileRef = D133163A2C467A4F0050C5C4 /* out-default.c */; };
+		D133163E2C467A4F0050C5C4 /* out-default.c in Sources */ = {isa = PBXBuildFile; fileRef = D133163A2C467A4F0050C5C4 /* out-default.c */; };
+		D13316412C467A5F0050C5C4 /* out-limd.c in Sources */ = {isa = PBXBuildFile; fileRef = D133163F2C467A5F0050C5C4 /* out-limd.c */; };
+		D13316422C467A5F0050C5C4 /* out-plutil.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316402C467A5F0050C5C4 /* out-plutil.c */; };
+		D13316432C467A5F0050C5C4 /* out-limd.c in Sources */ = {isa = PBXBuildFile; fileRef = D133163F2C467A5F0050C5C4 /* out-limd.c */; };
+		D13316442C467A5F0050C5C4 /* out-plutil.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316402C467A5F0050C5C4 /* out-plutil.c */; };
+		D13316452C467A5F0050C5C4 /* out-limd.c in Sources */ = {isa = PBXBuildFile; fileRef = D133163F2C467A5F0050C5C4 /* out-limd.c */; };
+		D13316462C467A5F0050C5C4 /* out-plutil.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316402C467A5F0050C5C4 /* out-plutil.c */; };
+		D13316472C467A5F0050C5C4 /* out-limd.c in Sources */ = {isa = PBXBuildFile; fileRef = D133163F2C467A5F0050C5C4 /* out-limd.c */; };
+		D13316482C467A5F0050C5C4 /* out-plutil.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316402C467A5F0050C5C4 /* out-plutil.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -583,6 +599,10 @@
 		CEF0B61328234B4800F425CB /* opack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opack.c; sourceTree = "<group>"; };
 		CEF0B61428234B4800F425CB /* termcolors.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = termcolors.c; sourceTree = "<group>"; };
 		CEF0B63928234CA600F425CB /* reverse_proxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = reverse_proxy.h; sourceTree = "<group>"; };
+		D13316352C467A230050C5C4 /* oplist.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = oplist.c; sourceTree = "<group>"; };
+		D133163A2C467A4F0050C5C4 /* out-default.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "out-default.c"; sourceTree = "<group>"; };
+		D133163F2C467A5F0050C5C4 /* out-limd.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "out-limd.c"; sourceTree = "<group>"; };
+		D13316402C467A5F0050C5C4 /* out-plutil.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "out-plutil.c"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -744,34 +764,38 @@
 			isa = PBXGroup;
 			children = (
 				CE98576F265C655900F9AAD4 /* Array.cpp */,
-				CE98577A265C655900F9AAD4 /* base64.c */,
 				CE98578A265C655A00F9AAD4 /* base64.h */,
+				CE98577A265C655900F9AAD4 /* base64.c */,
 				CE985780265C655900F9AAD4 /* Boolean.cpp */,
 				CE985781265C655900F9AAD4 /* bplist.c */,
-				CE985784265C655900F9AAD4 /* bytearray.c */,
 				CE98578D265C655A00F9AAD4 /* bytearray.h */,
+				CE985784265C655900F9AAD4 /* bytearray.c */,
 				CE98578F265C655A00F9AAD4 /* Data.cpp */,
 				CE985790265C655A00F9AAD4 /* Date.cpp */,
 				CE985782265C655900F9AAD4 /* Dictionary.cpp */,
-				CE98578C265C655A00F9AAD4 /* hashtable.c */,
 				CE98578B265C655A00F9AAD4 /* hashtable.h */,
+				CE98578C265C655A00F9AAD4 /* hashtable.c */,
 				CE985785265C655900F9AAD4 /* Integer.cpp */,
 				CED7994228234D9500D38243 /* jplist.c */,
-				CED7994328234D9500D38243 /* jsmn.c */,
 				CED7994428234D9500D38243 /* jsmn.h */,
+				CED7994328234D9500D38243 /* jsmn.c */,
 				CE98578E265C655A00F9AAD4 /* Key.cpp */,
 				CE985779265C655900F9AAD4 /* Node.cpp */,
-				CE985772265C655900F9AAD4 /* plist.c */,
+				D13316352C467A230050C5C4 /* oplist.c */,
+				D133163A2C467A4F0050C5C4 /* out-default.c */,
+				D133163F2C467A5F0050C5C4 /* out-limd.c */,
+				D13316402C467A5F0050C5C4 /* out-plutil.c */,
 				CE985777265C655900F9AAD4 /* plist.h */,
-				CE985787265C655900F9AAD4 /* ptrarray.c */,
+				CE985772265C655900F9AAD4 /* plist.c */,
 				CE985778265C655900F9AAD4 /* ptrarray.h */,
+				CE985787265C655900F9AAD4 /* ptrarray.c */,
 				CE98577B265C655900F9AAD4 /* Real.cpp */,
 				CE985788265C655900F9AAD4 /* strbuf.h */,
 				CE985789265C655A00F9AAD4 /* String.cpp */,
 				CE98577F265C655900F9AAD4 /* Structure.cpp */,
-				CE985774265C655900F9AAD4 /* time64_limits.h */,
-				CE985775265C655900F9AAD4 /* time64.c */,
 				CE98577D265C655900F9AAD4 /* time64.h */,
+				CE985775265C655900F9AAD4 /* time64.c */,
+				CE985774265C655900F9AAD4 /* time64_limits.h */,
 				CE985771265C655900F9AAD4 /* Uid.cpp */,
 				CE985791265C655A00F9AAD4 /* xplist.c */,
 			);
@@ -1275,6 +1299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D13316372C467A230050C5C4 /* oplist.c in Sources */,
 				CEF0B61D28234B4800F425CB /* glue.c in Sources */,
 				CEE8B47B265D5C4F007728F4 /* JBHostDevice.swift in Sources */,
 				CE985848265C6E1800F9AAD4 /* afc.c in Sources */,
@@ -1286,6 +1311,8 @@
 				CEE8B49A265D7B6F007728F4 /* PairingsView.swift in Sources */,
 				CE98584F265C6E1800F9AAD4 /* notification_proxy.c in Sources */,
 				CE98585A265C6E1800F9AAD4 /* mobilebackup.c in Sources */,
+				D13316452C467A5F0050C5C4 /* out-limd.c in Sources */,
+				D13316462C467A5F0050C5C4 /* out-plutil.c in Sources */,
 				CE93EC23266ABAA8002BB16C /* ManualAddHostView.swift in Sources */,
 				CE98585C265C6E1800F9AAD4 /* file_relay.c in Sources */,
 				CE4DEC2C2671732F003BDC3F /* AddressUtils.m in Sources */,
@@ -1350,6 +1377,7 @@
 				CE985792265C655A00F9AAD4 /* Array.cpp in Sources */,
 				CE985799265C655A00F9AAD4 /* Node.cpp in Sources */,
 				CEF0B61528234B4800F425CB /* collection.c in Sources */,
+				D133163E2C467A4F0050C5C4 /* out-default.c in Sources */,
 				CE9857A9265C655A00F9AAD4 /* Key.cpp in Sources */,
 				CE9857A7265C655A00F9AAD4 /* String.cpp in Sources */,
 				CED7994928234D9500D38243 /* jsmn.c in Sources */,
@@ -1386,6 +1414,8 @@
 				CE9858A5265C933000F9AAD4 /* screenshotr.c in Sources */,
 				CEF0B62428234B4800F425CB /* thread.c in Sources */,
 				CE9858C0265C933000F9AAD4 /* userpref.c in Sources */,
+				D13316412C467A5F0050C5C4 /* out-limd.c in Sources */,
+				D13316422C467A5F0050C5C4 /* out-plutil.c in Sources */,
 				CE9858BD265C933000F9AAD4 /* Dictionary.cpp in Sources */,
 				CE9858BA265C933000F9AAD4 /* mobileactivation.c in Sources */,
 				CE9858A8265C933000F9AAD4 /* Structure.cpp in Sources */,
@@ -1416,7 +1446,9 @@
 				CE9858B5265C933000F9AAD4 /* debug.c in Sources */,
 				CE9858AA265C933000F9AAD4 /* time64.c in Sources */,
 				CE9858AE265C933000F9AAD4 /* Uid.cpp in Sources */,
+				D13316392C467A230050C5C4 /* oplist.c in Sources */,
 				CE98589E265C933000F9AAD4 /* mobilebackup.c in Sources */,
+				D133163D2C467A4F0050C5C4 /* out-default.c in Sources */,
 				CEF0B61C28234B4800F425CB /* socket.c in Sources */,
 				CE9858A2265C933000F9AAD4 /* plist.c in Sources */,
 				CE9858C3265C933000F9AAD4 /* installation_proxy.c in Sources */,
@@ -1435,6 +1467,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA02A1D26685A2B00CF57E1 /* afc.c in Sources */,
+				D133163B2C467A4F0050C5C4 /* out-default.c in Sources */,
+				D13316472C467A5F0050C5C4 /* out-limd.c in Sources */,
+				D13316482C467A5F0050C5C4 /* out-plutil.c in Sources */,
 				CEF0B62F28234B4800F425CB /* cbuf.c in Sources */,
 				CEF0B61B28234B4800F425CB /* socket.c in Sources */,
 				CEA02A2F26685A2B00CF57E1 /* installation_proxy.c in Sources */,
@@ -1492,6 +1527,7 @@
 				CEA02A1926685A2B00CF57E1 /* debugserver.c in Sources */,
 				CEA02A0C26685A2B00CF57E1 /* companion_proxy.c in Sources */,
 				CEA02A2926685A2B00CF57E1 /* mobile_image_mounter.c in Sources */,
+				D13316382C467A230050C5C4 /* oplist.c in Sources */,
 				CEF0B62728234B4800F425CB /* tlv.c in Sources */,
 				CEA02A1226685A2B00CF57E1 /* service.c in Sources */,
 				CEA02A0626685A2B00CF57E1 /* property_list_service.c in Sources */,
@@ -1518,6 +1554,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D13316362C467A230050C5C4 /* oplist.c in Sources */,
 				CEF0B61E28234B4800F425CB /* glue.c in Sources */,
 				CEA65E7426C5E2CB00020562 /* JBHostDevice.swift in Sources */,
 				CEA65E7526C5E2CB00020562 /* afc.c in Sources */,
@@ -1529,6 +1566,8 @@
 				CEA65E7926C5E2CB00020562 /* PairingsView.swift in Sources */,
 				CEA65E7A26C5E2CB00020562 /* notification_proxy.c in Sources */,
 				CEA65E7B26C5E2CB00020562 /* mobilebackup.c in Sources */,
+				D13316432C467A5F0050C5C4 /* out-limd.c in Sources */,
+				D13316442C467A5F0050C5C4 /* out-plutil.c in Sources */,
 				CEA65E7C26C5E2CB00020562 /* ManualAddHostView.swift in Sources */,
 				CEA65E7D26C5E2CB00020562 /* file_relay.c in Sources */,
 				CEA65E7E26C5E2CB00020562 /* AddressUtils.m in Sources */,
@@ -1593,6 +1632,7 @@
 				CEA65EB726C5E2CB00020562 /* Array.cpp in Sources */,
 				CEA65EB826C5E2CB00020562 /* Node.cpp in Sources */,
 				CEF0B61628234B4800F425CB /* collection.c in Sources */,
+				D133163C2C467A4F0050C5C4 /* out-default.c in Sources */,
 				CEA65EB926C5E2CB00020562 /* Key.cpp in Sources */,
 				CEA65EBA26C5E2CB00020562 /* String.cpp in Sources */,
 				CED7994A28234D9500D38243 /* jsmn.c in Sources */,
@@ -1664,7 +1704,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = JitterbugTunnel/JitterbugTunnel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = D59DHVRS87;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1690,7 +1730,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = JitterbugTunnel/JitterbugTunnel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = D59DHVRS87;
 				INFOPLIST_FILE = JitterbugTunnel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1752,6 +1792,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"HAVE_CONFIG_H=1",
 					"DEBUG=1",
+					"PACKAGE_VERSION=\\\"TEST\\\"",
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1826,6 +1867,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"HAVE_CONFIG_H=1",
+					"PACKAGE_VERSION=\\\"TEST\\\"",
 					"$(inherited)",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1867,7 +1909,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jitterbug/Jitterbug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Jitterbug/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1895,7 +1937,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Jitterbug/Jitterbug.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Jitterbug/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1917,6 +1959,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D59DHVRS87;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_NAME = jitterbugpair;
 				SDKROOT = macosx;
@@ -1927,6 +1970,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D59DHVRS87;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_NAME = jitterbugpair;
 				SDKROOT = macosx;
@@ -1941,6 +1985,7 @@
 				CODE_SIGN_ENTITLEMENTS = JitterbugMac/JitterbugMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = JitterbugMac/Info.plist;
@@ -1965,6 +2010,7 @@
 				CODE_SIGN_ENTITLEMENTS = JitterbugMac/JitterbugMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = JitterbugMac/Info.plist;
@@ -1988,7 +2034,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Jitterbug/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -2013,7 +2059,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = D59DHVRS87;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Jitterbug/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

@@ -8,4 +8,4 @@ DEVELOPMENT_TEAM = XYZ0123456
 //   - com.myuniquename.Jitterbug.JitterbugTunnel
 // Make sure to include the Network Extensions entitlement unless you are only
 // build JitterbugLite.
-PRODUCT_BUNDLE_PREFIX = com.myuniquename
+PRODUCT_BUNDLE_PREFIX = com.xitrix

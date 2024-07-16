@@ -597,12 +597,12 @@ static ssize_t mim_upload_cb(void* buf, size_t size, void* userdata)
                         res = YES;
                     } else {
                         DEBUG_PRINT("unexpected status value:\n");
-                        plist_print_to_stream(result, stderr);
+//                        plist_print_to_stream(result, stderr);
                     }
                     free(status);
                 } else {
                     DEBUG_PRINT("unexpected result:\n");
-                    plist_print_to_stream(result, stderr);
+//                    plist_print_to_stream(result, stderr);
                 }
             }
             node = plist_dict_get_item(result, "Error");
@@ -615,11 +615,11 @@ static ssize_t mim_upload_cb(void* buf, size_t size, void* userdata)
                     free(errstr);
                 } else {
                     DEBUG_PRINT("unexpected result:\n");
-                    plist_print_to_stream(result, stderr);
+//                    plist_print_to_stream(result, stderr);
                 }
 
             } else {
-                plist_print_to_stream(result, stderr);
+//                plist_print_to_stream(result, stderr);
             }
         }
     } else {

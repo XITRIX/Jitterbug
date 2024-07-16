@@ -180,8 +180,8 @@ int main(int argc, const char * argv[]) {
         }
         goto leave;
     }
-    
-    if (!plist_write_to_filename(pair_record, path, PLIST_FORMAT_XML)) {
+
+    if (plist_write_to_file(pair_record, path, PLIST_FORMAT_XML, PLIST_OPT_NONE) != PLIST_ERR_SUCCESS) {
         result = EXIT_FAILURE;
         goto leave;
     }
