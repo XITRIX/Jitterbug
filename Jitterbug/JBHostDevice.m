@@ -23,6 +23,8 @@
 #include <libimobiledevice/sbservices.h>
 #include <libimobiledevice/service.h>
 #include <libimobiledevice-glue/utils.h>
+#include <OpenSSL/OpenSSL.h>
+#include <libtatsu/tss.h>
 #include "common/userpref.h"
 #import "JBApp.h"
 #import "JBHostDevice.h"
@@ -629,6 +631,327 @@ static ssize_t mim_upload_cb(void* buf, size_t size, void* userdata)
     if (result) {
         plist_free(result);
     }
+
+error_out:
+    /* perform hangup command */
+    mobile_image_mounter_hangup(mim);
+    /* free client */
+    mobile_image_mounter_free(mim);
+
+    return res;
+}
+
+- (BOOL)mountPersonalizedImage:(NSError **)error {
+
+    NSURL* imageUrl = [NSBundle.mainBundle URLForResource:@"Image" withExtension:@"dmg"];
+    NSURL* trustcacheUrl = [NSBundle.mainBundle URLForResource:@"Image.dmg" withExtension:@"trustcache"];
+    NSURL* manifestUrl = [NSBundle.mainBundle URLForResource:@"BuildManifest" withExtension:@"plist"];
+
+    mobile_image_mounter_error_t merr = MOBILE_IMAGE_MOUNTER_E_SUCCESS;
+    mobile_image_mounter_client_t mim = NULL;
+    BOOL res = NO;
+    const char *image_path = imageUrl.path.UTF8String;
+    size_t image_size = 0;
+    const char *tc_path = trustcacheUrl.path.UTF8String;
+    const char *build_manifest_path = manifestUrl.path.UTF8String;
+    const char *imagetype = "Personalized";
+    plist_t mount_options = NULL;
+    FILE *f;
+    struct stat fst;
+
+    unsigned char *sig = NULL;
+    size_t sig_length = 0;
+
+    // ??????
+    service_client_factory_start_service_with_lockdown(self.lockdown, self.device, MOBILE_IMAGE_MOUNTER_SERVICE_NAME, (void**)&mim, TOOL_NAME, SERVICE_CONSTRUCTOR(mobile_image_mounter_new), &merr);
+    if (merr != MOBILE_IMAGE_MOUNTER_E_SUCCESS) {
+        [self createError:error withString:NSLocalizedString(@"Could not connect to mobile_image_mounter!", @"JBHostDevice") code:merr];
+        return NO;
+    }
+    // ??????
+
+    plist_t build_manifest = NULL;
+    if (plist_read_from_file(build_manifest_path, &build_manifest, NULL) != 0) {
+        [self createError:error withString:NSLocalizedString(@"Cannot stat manifest file!", @"JBHostDevice") code:-errno];
+        goto error_out;
+    }
+
+    if (!build_manifest) {
+        [self createError:error withString:NSLocalizedString(@"Cannot stat manifest file!", @"JBHostDevice") code:-errno];
+        goto error_out;
+    }
+
+    plist_t identifiers = NULL;
+    merr = mobile_image_mounter_query_personalization_identifiers(mim, NULL, &identifiers);
+    if (merr != MOBILE_IMAGE_MOUNTER_E_SUCCESS) {
+        [self createError:error withString:NSLocalizedString(@"Cannot stat manifest file!", @"JBHostDevice") code:-errno];
+        goto error_out;
+    }
+
+    unsigned int board_id = plist_dict_get_uint(identifiers, "BoardId");
+    unsigned int chip_id = plist_dict_get_uint(identifiers, "ChipID");
+
+    plist_t build_identities = plist_dict_get_item(build_manifest, "BuildIdentities");
+    plist_array_iter iter;
+    plist_array_new_iter(build_identities, &iter);
+    plist_t item = NULL;
+    plist_t build_identity = NULL;
+    do {
+        plist_array_next_item(build_identities, iter, &item);
+        if (!item) {
+            break;
+        }
+        unsigned int bi_board_id = (unsigned int)plist_dict_get_uint(item, "ApBoardID");
+        unsigned int bi_chip_id = (unsigned int)plist_dict_get_uint(item, "ApChipID");
+        if (bi_chip_id == chip_id && bi_board_id == board_id) {
+            build_identity = item;
+            break;
+        }
+    } while (item);
+    plist_mem_free(iter);
+    if (!build_identity) {
+        fprintf(stderr, "Error: The given disk image is not compatible with the current device.\n");
+        [self createError:error withString:NSLocalizedString(@"Cannot stat manifest file!", @"JBHostDevice") code:-errno];
+        goto error_out;
+    }
+    plist_t p_tc_path = plist_access_path(build_identity, 4, "Manifest", "LoadableTrustCache", "Info", "Path");
+    if (!p_tc_path) {
+        fprintf(stderr, "Error: Could not determine path for trust cache!\n");
+        [self createError:error withString:NSLocalizedString(@"Cannot stat manifest file!", @"JBHostDevice") code:-errno];
+        goto error_out;
+    }
+    plist_t p_dmg_path = plist_access_path(build_identity, 4, "Manifest", "PersonalizedDMG", "Info", "Path");
+    if (!p_dmg_path) {
+        fprintf(stderr, "Error: Could not determine path for disk image!\n");
+        [self createError:error withString:NSLocalizedString(@"Cannot stat manifest file!", @"JBHostDevice") code:-errno];
+        goto error_out;
+    }
+//    char *tc_path = string_build_path(image_path, plist_get_string_ptr(p_tc_path, NULL), NULL);
+    unsigned char* trust_cache = NULL;
+    uint64_t trust_cache_size = 0;
+    if (!buffer_read_from_filename(tc_path, (char**)&trust_cache, &trust_cache_size)) {
+        fprintf(stderr, "Error: Trust cache does not exist at '%s'!\n", tc_path);
+        [self createError:error withString:NSLocalizedString(@"Cannot stat manifest file!", @"JBHostDevice") code:-errno];
+        goto error_out;
+    }
+    mount_options = plist_new_dict();
+    plist_dict_set_item(mount_options, "ImageTrustCache", plist_new_data((char*)trust_cache, trust_cache_size));
+    free(trust_cache);
+//    char *dmg_path = string_build_path(image_path, plist_get_string_ptr(p_dmg_path, NULL), NULL);
+//    free(image_path);
+//    image_path = dmg_path;
+    f = fopen(image_path, "rb");
+    if (!f) {
+        fprintf(stderr, "Error opening image file '%s': %s\n", image_path, strerror(errno));
+        [self createError:error withString:NSLocalizedString(@"Error opening image file", @"JBHostDevice") code:-errno];
+        goto error_out;
+    }
+
+    unsigned char buf[8192];
+    unsigned char sha384_digest[48];
+    SHA512_CTX ctx;
+    SHA384_Init(&ctx);
+    fstat(fileno(f), &fst);
+    image_size = fst.st_size;
+    while (!feof(f)) {
+        ssize_t fr = fread(buf, 1, sizeof(buf), f);
+        if (fr <= 0) {
+            break;
+        }
+        SHA384_Update(&ctx, buf, fr);
+    }
+    rewind(f);
+    SHA384_Final(sha384_digest, &ctx);
+    unsigned char* manifest = NULL;
+    unsigned int manifest_size = 0;
+    /* check if the device already has a personalization manifest for this image */
+    if (mobile_image_mounter_query_personalization_manifest(mim, "DeveloperDiskImage", sha384_digest, sizeof(sha384_digest), &manifest, &manifest_size) == MOBILE_IMAGE_MOUNTER_E_SUCCESS) {
+        printf("Using existing personalization manifest from device.\n");
+    } else {
+        /* we need to re-connect in this case */
+        mobile_image_mounter_free(mim);
+        mim = NULL;
+        if (mobile_image_mounter_start_service(_device, &mim, TOOL_NAME) != MOBILE_IMAGE_MOUNTER_E_SUCCESS) {
+            [self createError:error withString:NSLocalizedString(@"Cannot stat manifest file!", @"JBHostDevice") code:-errno];
+            goto error_out;
+        }
+        printf("No personalization manifest, requesting from TSS...\n");
+        unsigned char* nonce = NULL;
+        unsigned int nonce_size = 0;
+
+        /* create new TSS request and fill parameters */
+        plist_t request = tss_request_new(NULL);
+        plist_t params = plist_new_dict();
+        tss_parameters_add_from_manifest(params, build_identity, 1);
+
+        /* copy all `Ap,*` items from identifiers */
+        plist_dict_iter di = NULL;
+        plist_dict_new_iter(identifiers, &di);
+        plist_t node = NULL;
+        do {
+            char* key = NULL;
+            plist_dict_next_item(identifiers, di, &key, &node);
+            if (node) {
+                if (!strncmp(key, "Ap,", 3)) {
+                    plist_dict_set_item(request, key, plist_copy(node));
+                }
+            }
+            free(key);
+        } while (node);
+        plist_mem_free(di);
+
+        plist_dict_copy_uint(params, identifiers, "ApECID", "UniqueChipID");
+        plist_dict_set_item(params, "ApProductionMode", plist_new_bool(1));
+        plist_dict_set_item(params, "ApSecurityMode", plist_new_bool(1));
+        plist_dict_set_item(params, "ApSupportsImg4", plist_new_bool(1));
+
+        /* query nonce from image mounter service */
+        merr = mobile_image_mounter_query_nonce(mim, "DeveloperDiskImage", &nonce, &nonce_size);
+        if (merr == MOBILE_IMAGE_MOUNTER_E_SUCCESS) {
+            plist_dict_set_item(params, "ApNonce", plist_new_data((char*)nonce, nonce_size));
+        } else {
+            fprintf(stderr, "ERROR: Failed to query nonce for developer disk image: %d\n", merr);
+            [self createError:error withString:NSLocalizedString(@"Cannot stat manifest file!", @"JBHostDevice") code:-errno];
+            goto error_out;
+        }
+        mobile_image_mounter_free(mim);
+        mim = NULL;
+
+        plist_dict_set_item(params, "ApSepNonce", plist_new_data("\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00", 20));
+        plist_dict_set_item(params, "UID_MODE", plist_new_bool(0));
+        tss_request_add_ap_tags(request, params, NULL);
+        tss_request_add_common_tags(request, params, NULL);
+        tss_request_add_ap_img4_tags(request, params);
+        plist_free(params);
+
+        /* request IM4M from TSS */
+        plist_t response = tss_request_send(request, NULL);
+        plist_free(request);
+
+        plist_t p_manifest = plist_dict_get_item(response, "ApImg4Ticket");
+        if (!PLIST_IS_DATA(p_manifest)) {
+            fprintf(stderr, "Failed to get Img4Ticket\n");
+            [self createError:error withString:NSLocalizedString(@"Cannot stat manifest file!", @"JBHostDevice") code:-errno];
+            goto error_out;
+        }
+
+        uint64_t m4m_len = 0;
+        plist_get_data_val(p_manifest, (char**)&manifest, &m4m_len);
+        manifest_size = m4m_len;
+        plist_free(response);
+        printf("Done.\n");
+    }
+
+    sig = manifest;
+    sig_length = manifest_size;
+
+    char *targetname = NULL;
+    if (asprintf(&targetname, "%s/%s", PKG_PATH, "staging.dimage") < 0) {
+        [self createError:error withString:NSLocalizedString(@"Out of memory!?", @"JBHostDevice")];
+        goto error_out;
+    }
+    char *mountname = NULL;
+    if (asprintf(&mountname, "%s/%s", PATH_PREFIX, targetname) < 0) {
+        [self createError:error withString:NSLocalizedString(@"Out of memory!?", @"JBHostDevice")];
+        goto error_out;
+    }
+
+    if (!imagetype) {
+        imagetype = "Personalized";
+    }
+
+    if (!mim) {
+        if (mobile_image_mounter_start_service(_device, &mim, TOOL_NAME) != MOBILE_IMAGE_MOUNTER_E_SUCCESS) {
+            [self createError:error withString:NSLocalizedString(@"Cannot stat manifest file!", @"JBHostDevice") code:-errno];
+            goto error_out;
+        }
+    }
+
+    mobile_image_mounter_error_t err = MOBILE_IMAGE_MOUNTER_E_UNKNOWN_ERROR;
+
+    DEBUG_PRINT("Uploading %s\n", image_path);
+    err = mobile_image_mounter_upload_image(mim, imagetype, image_size, sig, sig_length, mim_upload_cb, f);
+    fclose(f);
+
+    if (err != MOBILE_IMAGE_MOUNTER_E_SUCCESS) {
+        if (err == MOBILE_IMAGE_MOUNTER_E_DEVICE_LOCKED) {
+            [self createError:error withString:NSLocalizedString(@"Device is locked, can't mount. Unlock device and try again.", @"JBHostDevice") code:err];
+        } else {
+            [self createError:error withString:NSLocalizedString(@"Unknown error occurred, can't mount.", @"JBHostDevice") code:err];
+        }
+        goto error_out;
+    }
+    DEBUG_PRINT("done.\n");
+
+
+    DEBUG_PRINT("Mounting...\n");
+    plist_t result = NULL;
+    err = mobile_image_mounter_mount_image_with_options(mim, mountname, sig, sig_length, imagetype, mount_options, &result);
+    if (err == MOBILE_IMAGE_MOUNTER_E_SUCCESS) {
+        if (result) {
+            plist_t node = plist_dict_get_item(result, "Status");
+            if (node) {
+                char *status = NULL;
+                plist_get_string_val(node, &status);
+                if (status) {
+                    if (!strcmp(status, "Complete")) {
+                        DEBUG_PRINT("Done.\n");
+                        res = YES;
+                    } else {
+                        DEBUG_PRINT("unexpected status value:\n");
+//                        plist_print_to_stream(result, stderr);
+                    }
+                    free(status);
+                } else {
+                    DEBUG_PRINT("unexpected result:\n");
+//                    plist_print_to_stream(result, stderr);
+                }
+            }
+            node = plist_dict_get_item(result, "Error");
+            if (node) {
+                char *errstr = NULL;
+                plist_get_string_val(node, &errstr);
+//                if (errstr) {
+//                    DEBUG_PRINT("Error: %s\n", errstr);
+//                    [self createError:error withString:[NSString stringWithUTF8String:errstr]];
+//                } else {
+                    printf("unexpected result:\n");
+                    plist_write_to_stream(result, stdout, PLIST_FORMAT_XML, 0);
+//                    [self createError:error withString:[NSString stringWithUTF8String:errstr]];
+//                }
+                node = plist_dict_get_item(result, "DetailedError");
+                if (node) {
+                    printf("DetailedError: %s\n", plist_get_string_ptr(node, NULL));
+                }
+            } else {
+                plist_write_to_stream(result, stdout, PLIST_FORMAT_XML, 0);
+//                [self createError:error withString:[NSString stringWithUTF8String:errstr]];
+            }
+
+//            if (node) {
+//                char *errstr = NULL;
+//                plist_get_string_val(node, &errstr);
+//                if (error) {
+//                    DEBUG_PRINT("Error: %s\n", errstr);
+//                    [self createError:error withString:[NSString stringWithUTF8String:errstr]];
+//                    free(errstr);
+//                } else {
+//                    DEBUG_PRINT("unexpected result:\n");
+////                    plist_print_to_stream(result, stderr);
+//                }
+//
+//            } else {
+////                plist_print_to_stream(result, stderr);
+//            }
+        }
+    } else {
+        [self createError:error withString:NSLocalizedString(@"Mount image failed.", @"JBHostDevice") code:err];
+    }
+
+    if (result) {
+        plist_free(result);
+    }
+    res = YES;
 
 error_out:
     /* perform hangup command */

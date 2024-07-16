@@ -146,13 +146,17 @@ struct DeviceDetailsView: View {
                 }
             }
         }.onChange(of :selectedSupportImageSignature) { url in
-            guard let supportImage = selectedSupportImage else {
-                return
+            if #available(iOS 17, *) {
+                mountPersonalizedImage()
+            } else {
+                guard let supportImage = selectedSupportImage else {
+                    return
+                }
+                guard let supportImageSignature = url else {
+                    return
+                }
+                mountImage(supportImage, signature: supportImageSignature)
             }
-            guard let supportImageSignature = url else {
-                return
-            }
-            mountImage(supportImage, signature: supportImageSignature)
         }.onChange(of: main.isTunnelStarted) { started in
             resetConnection {
                 if started {
@@ -221,7 +225,18 @@ struct DeviceDetailsView: View {
             }
         }
     }
-    
+
+    private func mountPersonalizedImage() {
+        main.backgroundTask(message: NSLocalizedString("Mounting disk image...", comment: "DeviceDetailsView")) {
+            try host.mountPersonalizedImage()
+        } onComplete: {
+            if let app = appToLaunchAfterMount {
+                appToLaunchAfterMount = nil
+                launchApplication(app)
+            }
+        }
+    }
+
     private func mountImage(_ supportImage: URL, signature supportImageSignature: URL) {
         main.backgroundTask(message: NSLocalizedString("Mounting disk image...", comment: "DeviceDetailsView")) {
             main.saveDiskImage(nil, signature: nil, forHostIdentifier: host.identifier)
@@ -241,6 +256,10 @@ struct DeviceDetailsView: View {
         var imageNotMounted = false
         main.backgroundTask(message: NSLocalizedString("Launching...", comment: "DeviceDetailsView")) {
             do {
+                if #available(iOS 17, *) {
+                    try host.mountPersonalizedImage()
+                }
+
                 try host.launchApplication(app)
             } catch {
                 let code = (error as NSError).code

@@ -20,7 +20,8 @@ struct DeviceListView: View {
     @EnvironmentObject private var main: Main
     @State private var showIpAlert: Bool = false
     @State private var manualAddHostPresented: Bool = false
-    
+    @State private var isFirstTime = true
+
     var body: some View {
         List {
             if !main.savedHosts.isEmpty {
@@ -40,19 +41,23 @@ struct DeviceListView: View {
                     }.deviceListContextMenu(host: host)
                 }
             }
-        }.navigationTitle("Devices")
+        }
+        .onAppear {
+            if isFirstTime {
+                isFirstTime = false
+                main.startScanning()
+            }
+        }
+        .onDisappear {
+//            main.stopScanning()
+        }
+        .navigationTitle("Devices")
         .toolbar {
             Button {
                 manualAddHostPresented.toggle()
             } label: {
                 Label("Add", systemImage: "plus")
             }
-        }
-        .onAppear {
-            main.startScanning()
-        }
-        .onDisappear {
-            main.stopScanning()
         }
         .popover(isPresented: $manualAddHostPresented, arrowEdge: .trailing) {
             // BUG: SwiftUI won't let us put this on the navbar or it won't close properly

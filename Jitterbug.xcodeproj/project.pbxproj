@@ -332,6 +332,10 @@
 		CEF0B63628234B4800F425CB /* termcolors.c in Sources */ = {isa = PBXBuildFile; fileRef = CEF0B61428234B4800F425CB /* termcolors.c */; };
 		CEF0B63728234B4800F425CB /* termcolors.c in Sources */ = {isa = PBXBuildFile; fileRef = CEF0B61428234B4800F425CB /* termcolors.c */; };
 		CEF0B63828234B4800F425CB /* termcolors.c in Sources */ = {isa = PBXBuildFile; fileRef = CEF0B61428234B4800F425CB /* termcolors.c */; };
+		D10998EB2C46AE240025B998 /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D10998EA2C46AE240025B998 /* curl.xcframework */; };
+		D10998EC2C46AE240025B998 /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D10998EA2C46AE240025B998 /* curl.xcframework */; };
+		D10998ED2C46AE240025B998 /* curl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D10998EA2C46AE240025B998 /* curl.xcframework */; };
+		D10998EF2C46AF190025B998 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D10998EE2C46AF190025B998 /* libz.tbd */; };
 		D13316362C467A230050C5C4 /* oplist.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316352C467A230050C5C4 /* oplist.c */; };
 		D13316372C467A230050C5C4 /* oplist.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316352C467A230050C5C4 /* oplist.c */; };
 		D13316382C467A230050C5C4 /* oplist.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316352C467A230050C5C4 /* oplist.c */; };
@@ -348,6 +352,18 @@
 		D13316462C467A5F0050C5C4 /* out-plutil.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316402C467A5F0050C5C4 /* out-plutil.c */; };
 		D13316472C467A5F0050C5C4 /* out-limd.c in Sources */ = {isa = PBXBuildFile; fileRef = D133163F2C467A5F0050C5C4 /* out-limd.c */; };
 		D13316482C467A5F0050C5C4 /* out-plutil.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316402C467A5F0050C5C4 /* out-plutil.c */; };
+		D133164D2C469B450050C5C4 /* Image.dmg in Resources */ = {isa = PBXBuildFile; fileRef = D133164B2C469B450050C5C4 /* Image.dmg */; };
+		D133164E2C469B450050C5C4 /* BuildManifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = D133164A2C469B450050C5C4 /* BuildManifest.plist */; };
+		D133164F2C469B450050C5C4 /* Image.dmg.trustcache in Resources */ = {isa = PBXBuildFile; fileRef = D133164C2C469B450050C5C4 /* Image.dmg.trustcache */; };
+		D13316502C469B450050C5C4 /* Image.dmg in Resources */ = {isa = PBXBuildFile; fileRef = D133164B2C469B450050C5C4 /* Image.dmg */; };
+		D13316512C469B450050C5C4 /* BuildManifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = D133164A2C469B450050C5C4 /* BuildManifest.plist */; };
+		D13316522C469B450050C5C4 /* Image.dmg.trustcache in Resources */ = {isa = PBXBuildFile; fileRef = D133164C2C469B450050C5C4 /* Image.dmg.trustcache */; };
+		D133166C2C46AC400050C5C4 /* tatsu.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316602C46AC400050C5C4 /* tatsu.c */; };
+		D133166D2C46AC400050C5C4 /* tss.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316612C46AC400050C5C4 /* tss.c */; };
+		D13316882C46AC400050C5C4 /* tatsu.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316602C46AC400050C5C4 /* tatsu.c */; };
+		D13316892C46AC400050C5C4 /* tss.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316612C46AC400050C5C4 /* tss.c */; };
+		D13316972C46AC400050C5C4 /* tatsu.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316602C46AC400050C5C4 /* tatsu.c */; };
+		D13316982C46AC400050C5C4 /* tss.c in Sources */ = {isa = PBXBuildFile; fileRef = D13316612C46AC400050C5C4 /* tss.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -599,10 +615,20 @@
 		CEF0B61328234B4800F425CB /* opack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = opack.c; sourceTree = "<group>"; };
 		CEF0B61428234B4800F425CB /* termcolors.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = termcolors.c; sourceTree = "<group>"; };
 		CEF0B63928234CA600F425CB /* reverse_proxy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = reverse_proxy.h; sourceTree = "<group>"; };
+		D10998EA2C46AE240025B998 /* curl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = curl.xcframework; sourceTree = "<group>"; };
+		D10998EE2C46AF190025B998 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		D13316352C467A230050C5C4 /* oplist.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = oplist.c; sourceTree = "<group>"; };
 		D133163A2C467A4F0050C5C4 /* out-default.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "out-default.c"; sourceTree = "<group>"; };
 		D133163F2C467A5F0050C5C4 /* out-limd.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "out-limd.c"; sourceTree = "<group>"; };
 		D13316402C467A5F0050C5C4 /* out-plutil.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "out-plutil.c"; sourceTree = "<group>"; };
+		D133164A2C469B450050C5C4 /* BuildManifest.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = BuildManifest.plist; sourceTree = "<group>"; };
+		D133164B2C469B450050C5C4 /* Image.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = Image.dmg; sourceTree = "<group>"; };
+		D133164C2C469B450050C5C4 /* Image.dmg.trustcache */ = {isa = PBXFileReference; lastKnownFileType = file; path = Image.dmg.trustcache; sourceTree = "<group>"; };
+		D13316562C46AC400050C5C4 /* tatsu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tatsu.h; sourceTree = "<group>"; };
+		D13316572C46AC400050C5C4 /* tss.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tss.h; sourceTree = "<group>"; };
+		D133165D2C46AC400050C5C4 /* common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		D13316602C46AC400050C5C4 /* tatsu.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tatsu.c; sourceTree = "<group>"; };
+		D13316612C46AC400050C5C4 /* tss.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tss.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -618,8 +644,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D10998EF2C46AF190025B998 /* libz.tbd in Frameworks */,
 				CE985862265C703A00F9AAD4 /* OpenSSL in Frameworks */,
 				CE4DEC2E26717E00003BDC3F /* NetworkExtension.framework in Frameworks */,
+				D10998ED2C46AE240025B998 /* curl.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,6 +664,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA02A3226685A4B00CF57E1 /* OpenSSL in Frameworks */,
+				D10998EC2C46AE240025B998 /* curl.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +673,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA65EC026C5E2CB00020562 /* OpenSSL in Frameworks */,
+				D10998EB2C46AE240025B998 /* curl.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,6 +720,7 @@
 		CE985749265C635000F9AAD4 /* Jitterbug */ = {
 			isa = PBXGroup;
 			children = (
+				D13316492C469B220050C5C4 /* PersonalizedImage */,
 				CE4DEC2D26717E00003BDC3F /* Jitterbug.entitlements */,
 				CE985869265C75B300F9AAD4 /* Jitterbug-Bridging-Header.h */,
 				CEE8B460265CBFC2007728F4 /* libusbmuxd-stub.c */,
@@ -733,11 +764,13 @@
 		CE98575A265C636900F9AAD4 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				D10998EA2C46AE240025B998 /* curl.xcframework */,
 				CE9857B0265C65A300F9AAD4 /* include */,
 				CE9857DF265C6D8A00F9AAD4 /* libimobiledevice */,
 				CEF0B5FE28234ABC00F425CB /* libimobiledevice-glue */,
 				CE98575D265C64DD00F9AAD4 /* libplist */,
 				CE9857C9265C696A00F9AAD4 /* libusbmuxd */,
+				D133166B2C46AC400050C5C4 /* libtatsu */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -1012,6 +1045,7 @@
 		CE9858C9265C934600F9AAD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D10998EE2C46AF190025B998 /* libz.tbd */,
 				CE97FFC4267113FB007FE23E /* NetworkExtension.framework */,
 			);
 			name = Frameworks;
@@ -1087,6 +1121,52 @@
 				CEF0B60828234B2D00F425CB /* utils.h */,
 			);
 			path = "libimobiledevice-glue";
+			sourceTree = "<group>";
+		};
+		D13316492C469B220050C5C4 /* PersonalizedImage */ = {
+			isa = PBXGroup;
+			children = (
+				D133164A2C469B450050C5C4 /* BuildManifest.plist */,
+				D133164B2C469B450050C5C4 /* Image.dmg */,
+				D133164C2C469B450050C5C4 /* Image.dmg.trustcache */,
+			);
+			path = PersonalizedImage;
+			sourceTree = "<group>";
+		};
+		D13316582C46AC400050C5C4 /* libtatsu */ = {
+			isa = PBXGroup;
+			children = (
+				D13316562C46AC400050C5C4 /* tatsu.h */,
+				D13316572C46AC400050C5C4 /* tss.h */,
+			);
+			path = libtatsu;
+			sourceTree = "<group>";
+		};
+		D133165A2C46AC400050C5C4 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				D13316582C46AC400050C5C4 /* libtatsu */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		D13316622C46AC400050C5C4 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D133165D2C46AC400050C5C4 /* common.h */,
+				D13316602C46AC400050C5C4 /* tatsu.c */,
+				D13316612C46AC400050C5C4 /* tss.c */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		D133166B2C46AC400050C5C4 /* libtatsu */ = {
+			isa = PBXGroup;
+			children = (
+				D133165A2C46AC400050C5C4 /* include */,
+				D13316622C46AC400050C5C4 /* src */,
+			);
+			path = libtatsu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1259,6 +1339,9 @@
 				4B811C372688D54100046341 /* Localizable.strings in Resources */,
 				4B811C342688D54100046341 /* InfoPlist.strings in Resources */,
 				CE98574F265C635300F9AAD4 /* Assets.xcassets in Resources */,
+				D13316502C469B450050C5C4 /* Image.dmg in Resources */,
+				D13316512C469B450050C5C4 /* BuildManifest.plist in Resources */,
+				D13316522C469B450050C5C4 /* Image.dmg.trustcache in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1280,6 +1363,9 @@
 				CEA65EC426C5E2CB00020562 /* Localizable.strings in Resources */,
 				CEA65EC526C5E2CB00020562 /* InfoPlist.strings in Resources */,
 				CEA65EC626C5E2CB00020562 /* Assets.xcassets in Resources */,
+				D133164D2C469B450050C5C4 /* Image.dmg in Resources */,
+				D133164E2C469B450050C5C4 /* BuildManifest.plist in Resources */,
+				D133164F2C469B450050C5C4 /* Image.dmg.trustcache in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1344,6 +1430,8 @@
 				CE985852265C6E1800F9AAD4 /* preboard.c in Sources */,
 				CE98585B265C6E1800F9AAD4 /* restore.c in Sources */,
 				CEE8B4B2265D9550007728F4 /* Extensions.swift in Sources */,
+				D13316882C46AC400050C5C4 /* tatsu.c in Sources */,
+				D13316892C46AC400050C5C4 /* tss.c in Sources */,
 				CEE8B484265D6A51007728F4 /* JBApp.m in Sources */,
 				CE985856265C6E1800F9AAD4 /* device_link_service.c in Sources */,
 				CEF0B63128234B4800F425CB /* opack.c in Sources */,
@@ -1469,6 +1557,8 @@
 				CEA02A1D26685A2B00CF57E1 /* afc.c in Sources */,
 				D133163B2C467A4F0050C5C4 /* out-default.c in Sources */,
 				D13316472C467A5F0050C5C4 /* out-limd.c in Sources */,
+				D133166C2C46AC400050C5C4 /* tatsu.c in Sources */,
+				D133166D2C46AC400050C5C4 /* tss.c in Sources */,
 				D13316482C467A5F0050C5C4 /* out-plutil.c in Sources */,
 				CEF0B62F28234B4800F425CB /* cbuf.c in Sources */,
 				CEF0B61B28234B4800F425CB /* socket.c in Sources */,
@@ -1599,6 +1689,8 @@
 				CEA65E9726C5E2CB00020562 /* preboard.c in Sources */,
 				CEA65E9826C5E2CB00020562 /* restore.c in Sources */,
 				CEA65E9926C5E2CB00020562 /* Extensions.swift in Sources */,
+				D13316972C46AC400050C5C4 /* tatsu.c in Sources */,
+				D13316982C46AC400050C5C4 /* tss.c in Sources */,
 				CEA65E9A26C5E2CB00020562 /* JBApp.m in Sources */,
 				CEA65E9B26C5E2CB00020562 /* device_link_service.c in Sources */,
 				CEF0B63228234B4800F425CB /* opack.c in Sources */,
@@ -1806,6 +1898,7 @@
 					"$(PROJECT_DIR)/Libraries/include",
 					"$(PROJECT_DIR)/Libraries/libplist/include",
 					"$(PROJECT_DIR)/Libraries/libplist/libcnary/include",
+					"$(PROJECT_DIR)/Libraries/libtatsu/include",
 					"$(PROJECT_DIR)/Libraries/libplist/src",
 					"$(PROJECT_DIR)/Libraries/libusbmuxd/common",
 					"$(PROJECT_DIR)/Libraries/libusbmuxd/include",
@@ -1881,6 +1974,7 @@
 					"$(PROJECT_DIR)/Libraries/include",
 					"$(PROJECT_DIR)/Libraries/libplist/include",
 					"$(PROJECT_DIR)/Libraries/libplist/libcnary/include",
+					"$(PROJECT_DIR)/Libraries/libtatsu/include",
 					"$(PROJECT_DIR)/Libraries/libplist/src",
 					"$(PROJECT_DIR)/Libraries/libusbmuxd/common",
 					"$(PROJECT_DIR)/Libraries/libusbmuxd/include",

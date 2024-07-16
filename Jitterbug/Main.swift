@@ -33,7 +33,8 @@ class Main: NSObject, ObservableObject {
     
     @Published var pairings: [URL] = []
     @Published var supportImages: [URL] = []
-    
+    @Published var personalizedImages: [URL] = []
+
     private let hostFinder = HostFinder()
     
     @Published var hasLocalDeviceSupport = false
@@ -83,6 +84,7 @@ class Main: NSObject, ObservableObject {
         hostFinder.delegate = self
         refreshPairings()
         refreshSupportImages()
+        refrestPersonalizedImages()
         unarchiveSavedHosts()
         #if WITH_VPN
         initTunnel()
@@ -176,7 +178,15 @@ class Main: NSObject, ObservableObject {
     func refreshSupportImages() {
         refresh(directory: supportImagesURL, list: &supportImages)
     }
-    
+
+    func refrestPersonalizedImages() {
+        personalizedImages = [
+            Bundle.main.url(forResource: "BuildManifest", withExtension: "plist"),
+            Bundle.main.url(forResource: "Image", withExtension: "dmg"),
+            Bundle.main.url(forResource: "Image.dmg", withExtension: "trustcache")
+        ].compactMap { $0 }
+    }
+
     func deletePairing(_ pairing: URL) throws {
         try self.fileManager.removeItem(at: pairing)
     }

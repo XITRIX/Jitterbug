@@ -51,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)updateDeviceInfoWithError:(NSError **)error;
 - (nullable NSArray<JBApp *> *)installedAppsWithError:(NSError **)error;
 - (BOOL)mountImageForUrl:(NSURL *)url signatureUrl:(NSURL *)signatureUrl error:(NSError **)error;
+- (BOOL)mountPersonalizedImage:(NSError **)error;
 - (BOOL)launchApplication:(JBApp *)application error:(NSError **)error;
 
 - (BOOL)resetPairingWithError:(NSError **)error;

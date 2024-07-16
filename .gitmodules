@@ -10,3 +10,6 @@
 [submodule "Libraries/libimobiledevice-glue"]
 	path = Libraries/libimobiledevice-glue
 	url = https://github.com/libimobiledevice/libimobiledevice-glue.git
+[submodule "Libraries/libtatsu"]
+	path = Libraries/libtatsu
+	url = https://github.com/libimobiledevice/libtatsu.git
